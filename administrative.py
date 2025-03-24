@@ -264,15 +264,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         if userFilter == '':
             userFilterString = ''
         else:
-            f"AND hetu = '{userFilter}'"
+            userFilterString = f"AND hetu = '{userFilter}'"
             
         if registerFilter == '':
             registerFilterString = ''
         else:
-            f"AND rekisterinumero = '{registerFilter}'"
+            registerFilterString =  f"AND rekisterinumero = '{registerFilter}'"
 
         sqlFilter = dateFilterSring + userFilterString + registerFilterString
-        print(sqlFilter)
         tableData = dbConnection.filterColumsFromTable(reportName,['*'], sqlFilter)
     
         # Tyhjennetään vanhat tiedot käyttöliittymästä ennen uusien lukemista tietokannasta
