@@ -35,7 +35,7 @@
      <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="lenderTab">
      <property name="cursor">
@@ -10086,7 +10086,7 @@
       <property name="geometry">
        <rect>
         <x>310</x>
-        <y>180</y>
+        <y>184</y>
         <width>71</width>
         <height>23</height>
        </rect>
@@ -10114,7 +10114,7 @@ color: rgb(255, 255, 255);</string>
         <x>130</x>
         <y>10</y>
         <width>171</width>
-        <height>191</height>
+        <height>201</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="studentInputsVerticalLayout">
@@ -10125,6 +10125,15 @@ color: rgb(255, 255, 255);</string>
            <pointsize>11</pointsize>
           </font>
          </property>
+         <property name="toolTip">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Henkilötunnus, pakollinen tieto&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
@@ -10133,6 +10142,12 @@ color: rgb(255, 255, 255);</string>
           <font>
            <pointsize>11</pointsize>
           </font>
+         </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
          </property>
         </widget>
        </item>
@@ -10143,6 +10158,12 @@ color: rgb(255, 255, 255);</string>
            <pointsize>11</pointsize>
           </font>
          </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
@@ -10152,10 +10173,19 @@ color: rgb(255, 255, 255);</string>
            <pointsize>11</pointsize>
           </font>
          </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="agbRestrictionCheckBox">
+         <property name="toolTip">
+          <string>Ajaminen sallittu vain automaattivaihteilla, pakollinen tieto</string>
+         </property>
          <property name="text">
           <string>Vain automaattivaihteet</string>
          </property>
@@ -10168,6 +10198,12 @@ color: rgb(255, 255, 255);</string>
            <pointsize>11</pointsize>
           </font>
          </property>
+         <property name="placeholderText">
+          <string>Valinnainen tieto</string>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
         </widget>
        </item>
       </layout>
@@ -10178,7 +10214,7 @@ color: rgb(255, 255, 255);</string>
         <x>20</x>
         <y>10</y>
         <width>101</width>
-        <height>191</height>
+        <height>201</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="studentLabelsVerticalLayout">
@@ -10254,8 +10290,8 @@ color: rgb(255, 255, 255);</string>
      <widget class="QPushButton" name="deletePersonPushButton">
       <property name="geometry">
        <rect>
-        <x>310</x>
-        <y>20</y>
+        <x>400</x>
+        <y>184</y>
         <width>71</width>
         <height>23</height>
        </rect>
@@ -10395,6 +10431,9 @@ color: rgb(255, 255, 255);</string>
            <pointsize>11</pointsize>
           </font>
          </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
+         </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
          </property>
@@ -10406,6 +10445,9 @@ color: rgb(255, 255, 255);</string>
           <font>
            <pointsize>11</pointsize>
           </font>
+         </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
          </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
@@ -10419,6 +10461,9 @@ color: rgb(255, 255, 255);</string>
            <pointsize>11</pointsize>
           </font>
          </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
+         </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
          </property>
@@ -10430,6 +10475,9 @@ color: rgb(255, 255, 255);</string>
           <font>
            <pointsize>11</pointsize>
           </font>
+         </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
          </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
@@ -10443,6 +10491,9 @@ color: rgb(255, 255, 255);</string>
            <pointsize>11</pointsize>
           </font>
          </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
+         </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
          </property>
@@ -10455,10 +10506,16 @@ color: rgb(255, 255, 255);</string>
            <pointsize>11</pointsize>
           </font>
          </property>
+         <property name="placeholderText">
+          <string>Pakollinen tieto</string>
+         </property>
         </widget>
        </item>
        <item>
         <widget class="QCheckBox" name="agbCheckBox">
+         <property name="toolTip">
+          <string>Autossa automaattivaihteet, pakollinen tieto</string>
+         </property>
          <property name="text">
           <string>Automaattivaihteet</string>
          </property>
@@ -10466,6 +10523,9 @@ color: rgb(255, 255, 255);</string>
        </item>
        <item>
         <widget class="QLineEdit" name="vehicleOwnerLineEdit">
+         <property name="placeholderText">
+          <string>Valinnainen tieto</string>
+         </property>
          <property name="clearButtonEnabled">
           <bool>true</bool>
          </property>
@@ -10477,7 +10537,7 @@ color: rgb(255, 255, 255);</string>
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>200</y>
+        <y>220</y>
         <width>101</width>
         <height>25</height>
        </rect>
@@ -10504,12 +10564,15 @@ color: rgb(255, 255, 255);</string>
        <rect>
         <x>10</x>
         <y>270</y>
-        <width>831</width>
+        <width>941</width>
         <height>241</height>
        </rect>
       </property>
       <property name="cursor" stdset="0">
        <cursorShape>ArrowCursor</cursorShape>
+      </property>
+      <property name="toolTip">
+       <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Valitse auto klikkaamalla solua. Tämän jälkeen auton voi poistaa tai estää sen lainaamisen.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
       </property>
       <property name="verticalScrollBarPolicy">
        <enum>Qt::ScrollBarPolicy::ScrollBarAsNeeded</enum>
@@ -10521,7 +10584,7 @@ color: rgb(255, 255, 255);</string>
        <number>99</number>
       </property>
       <property name="columnCount">
-       <number>9</number>
+       <number>10</number>
       </property>
       <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
        <bool>false</bool>
@@ -10637,6 +10700,7 @@ color: rgb(255, 255, 255);</string>
       <column/>
       <column/>
       <column/>
+      <column/>
      </widget>
      <widget class="QPushButton" name="openPicturePushButton">
       <property name="geometry">
@@ -10672,8 +10736,8 @@ color: rgb(255, 255, 255);</string>
      <widget class="QLabel" name="vehiclePictureLabel">
       <property name="geometry">
        <rect>
-        <x>440</x>
-        <y>10</y>
+        <x>670</x>
+        <y>20</y>
         <width>281</width>
         <height>211</height>
        </rect>
@@ -10694,8 +10758,8 @@ color: rgb(255, 255, 255);</string>
      <widget class="QPushButton" name="removeVehiclePushButton">
       <property name="geometry">
        <rect>
-        <x>300</x>
-        <y>0</y>
+        <x>530</x>
+        <y>220</y>
         <width>101</width>
         <height>25</height>
        </rect>
@@ -10715,6 +10779,32 @@ color: rgb(255, 255, 255);</string>
       </property>
       <property name="text">
        <string>Poista</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="notLendablePushButton">
+      <property name="geometry">
+       <rect>
+        <x>410</x>
+        <y>220</y>
+        <width>111</width>
+        <height>25</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgb(255, 170, 0);
+color: rgb(255, 255, 255);</string>
+      </property>
+      <property name="text">
+       <string>Ei lainattavissa</string>
       </property>
      </widget>
     </widget>
@@ -10850,7 +10940,7 @@ color: rgb(255, 255, 255);</string>
      <widget class="QPushButton" name="printReportPushButton">
       <property name="geometry">
        <rect>
-        <x>610</x>
+        <x>740</x>
         <y>80</y>
         <width>61</width>
         <height>23</height>
@@ -10889,7 +10979,7 @@ background-color: rgb(220, 162, 25);</string>
        <number>10000</number>
       </property>
       <property name="columnCount">
-       <number>7</number>
+       <number>8</number>
       </property>
       <row/>
       <row/>
@@ -20891,6 +20981,7 @@ background-color: rgb(220, 162, 25);</string>
       <row/>
       <row/>
       <row/>
+      <column/>
       <column/>
       <column/>
       <column/>
@@ -20921,6 +21012,9 @@ background-color: rgb(220, 162, 25);</string>
         <height>22</height>
        </rect>
       </property>
+      <property name="clearButtonEnabled">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QLineEdit" name="registerFilterLineEdit">
       <property name="geometry">
@@ -20930,6 +21024,9 @@ background-color: rgb(220, 162, 25);</string>
         <width>113</width>
         <height>22</height>
        </rect>
+      </property>
+      <property name="clearButtonEnabled">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QLabel" name="ssnFilterLabel">
@@ -20971,7 +21068,7 @@ background-color: rgb(220, 162, 25);</string>
      <widget class="QPushButton" name="getReportPushButton">
       <property name="geometry">
        <rect>
-        <x>520</x>
+        <x>670</x>
         <y>80</y>
         <width>61</width>
         <height>23</height>
@@ -20993,6 +21090,293 @@ color: rgb(255, 255, 255);</string>
       <property name="text">
        <string>Hae</string>
       </property>
+     </widget>
+     <widget class="QLineEdit" name="reasonFilterLineEdit">
+      <property name="geometry">
+       <rect>
+        <x>520</x>
+        <y>80</y>
+        <width>113</width>
+        <height>22</height>
+       </rect>
+      </property>
+      <property name="clearButtonEnabled">
+       <bool>true</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="reasonFilterLabel">
+      <property name="geometry">
+       <rect>
+        <x>520</x>
+        <y>60</y>
+        <width>111</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>Tarkoitus</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="maintenanceTab">
+     <attribute name="title">
+      <string>Ylläpito</string>
+     </attribute>
+     <widget class="QFrame" name="frame">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>371</width>
+        <height>451</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Shape::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Shadow::Raised</enum>
+      </property>
+      <widget class="QTableWidget" name="vehicleTypeTableWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>70</y>
+         <width>341</width>
+         <height>211</height>
+        </rect>
+       </property>
+       <property name="sortingEnabled">
+        <bool>true</bool>
+       </property>
+       <property name="rowCount">
+        <number>10</number>
+       </property>
+       <property name="columnCount">
+        <number>1</number>
+       </property>
+       <attribute name="horizontalHeaderStretchLastSection">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="verticalHeaderStretchLastSection">
+        <bool>false</bool>
+       </attribute>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <column/>
+      </widget>
+      <widget class="QLineEdit" name="vehicleTypeAddLineEdit">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>231</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="vehicleTypeAddPushButton">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>30</y>
+         <width>75</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(57, 136, 220);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Lisää</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="vehicleTypeDeletePushButton">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>300</y>
+         <width>75</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 0, 0);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Poista</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="vehicleTypeAddLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>101</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Ajoneuvotyypit</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="frame_2">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>10</y>
+        <width>371</width>
+        <height>451</height>
+       </rect>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Shape::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Shadow::Raised</enum>
+      </property>
+      <widget class="QTableWidget" name="reasonAddTableWidget">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>70</y>
+         <width>341</width>
+         <height>211</height>
+        </rect>
+       </property>
+       <property name="rowCount">
+        <number>10</number>
+       </property>
+       <property name="columnCount">
+        <number>1</number>
+       </property>
+       <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="horizontalHeaderStretchLastSection">
+        <bool>true</bool>
+       </attribute>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <row/>
+       <column/>
+      </widget>
+      <widget class="QLineEdit" name="reasonAddLineEdit">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>30</y>
+         <width>211</width>
+         <height>22</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="reasonAddPushButton">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>30</y>
+         <width>75</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(57, 136, 220);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Lisää</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="reasonDeltePushButton">
+       <property name="geometry">
+        <rect>
+         <x>280</x>
+         <y>300</y>
+         <width>75</width>
+         <height>24</height>
+        </rect>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 0, 0);
+color: rgb(255, 255, 255);</string>
+       </property>
+       <property name="text">
+        <string>Poista</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="reasonAddLabel">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>111</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Ajon tarkoitukset</string>
+       </property>
+      </widget>
      </widget>
     </widget>
    </widget>
