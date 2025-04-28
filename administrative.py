@@ -11,8 +11,8 @@ import json # JSON-objektien ja tiedostojen käsittely
 
 # Asennuksen vaativat kirjastot
 from PySide6 import QtWidgets # Qt-vimpaimet
-from PySide6 import QtGui # Pixmap-muunnoksia varten
-from PySide6.QtCore import QDate
+from PySide6 import QtGui # Pixmap ja web-sivujen näyttö
+from PySide6.QtCore import QDate, QUrl # Päivämäärät ja URL-osoitteet
 
 
 # Käyttöliittymämoduulien lataukset
@@ -85,6 +85,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         
         # Valikkotoiminnot
         self.ui.actionMuokkaa.triggered.connect(self.openSettingsDialog)
+        self.ui.actionOhjesivut.triggered.connect(self.openWebHelp)
         self.ui.actionTietoja_ohjelmasta.triggered.connect(self.openAboutDialog)
 
         # Välilehtien vaihdon käynnistämät signaalit
@@ -104,6 +105,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.vehicleTypeAddPushButton.clicked.connect(self.newVehicleType)
         self.ui.reasonDeltePushButton.clicked.connect(self.deleteReason)
         self.ui.vehicleTypeDeletePushButton.clicked.connect(self.deleteVehicleType)
+        self.ui.updatePicturePushButton.clicked.connect(self.updatePicture)
 
         # Taulukoiden solujen klikkaaminen
         self.ui.vehicleCatalogTableWidget.cellClicked.connect(self.setRegisterNumber)
@@ -148,11 +150,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.saveSettingsDialog.setWindowTitle('Palvelinasetukset')
         self.saveSettingsDialog.exec() # Luodaan dialogille oma event loop
         
-    # Tietoja ohjelmasta -dialogin avaus
+    # Tietoja ohjelmasta -sivun avaus (repositorion readme.md)
     def openAboutDialog(self):
-        self.aboutDialog = AboutDialog()
-        self.aboutDialog.setWindowTitle('Tietoja ohjelmasta')
-        self.aboutDialog.exec() # Luodaan dialogille event loop
+        url = QUrl('https://github.com/TiViOpetus/Autolainaus_hallinta/blob/main/README.md')
+        QtGui.QDesktopServices.openUrl(url)
+        
+
+    def openWebHelp(self):
+        url = QUrl('https://github.com/TiViOpetus/Autolainaus_hallinta/wiki/K%C3%A4ytt%C3%B6ohje')
+        QtGui.QDesktopServices.openUrl(url)
 
     # Yleinen käyttöliittymän verestys (refresh)
     def refreshUi(self):
@@ -177,7 +183,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.reasonAddPushButton.setHidden(True) # Ajon syyn lisäyspainike piiloon
         self.ui.reasonDeltePushButton.setHidden(True) # Ajon syyn poistopainike piiloon
         self.ui.vehicleTypeDeletePushButton.setHidden(True) # Ajon tarkoituksen poistopainike piiloon
-        
+        self.ui.updatePicturePushButton.setHidden(True) # Auton kuvan päivityspainike piiloon
     
     # Välilehtien slotit
     # ------------------
@@ -327,11 +333,15 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.diaryTableWidget.clearContents()
 
         # Määritellään taulukkoelementin otsikot
-        headerRow = ['Rekisteri', 'Merkki', 'Tarkoitus', 'HeTu', 'Sukunimi', 'Etunimi', 'Otettu', 'Palautettu']
+        headerRow = ['Rekisteri', 'Merkki', 'Malli', 'Tarkoitus', 'HeTu', 'Sukunimi', 'Etunimi', 'Otettu', 'Palautettu']
         self.ui.diaryTableWidget.setHorizontalHeaderLabels(headerRow)
 
+        # Tulosjoukon rivimäärä
+        numberOfRows = len(tableData)
+        self.ui.diaryTableWidget.setRowCount(numberOfRows)
+
         # Asetetaan taulukon solujen arvot
-        for row in range(len(tableData)): # Luetaan listaa riveittäin
+        for row in range(numberOfRows): # Luetaan listaa riveittäin
             for column in range(len(tableData[row])): # Luetaan monikkoa sarakkeittain
                 
                 # Muutetaan merkkijonoksi ja QTableWidgetItem-olioksi
@@ -455,10 +465,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def showReasonAddPB(self):
         self.ui.reasonAddPushButton.setHidden(False)
 
-    # Piilotetaan ajoneuvon Poista- ja Ei käytettävissä -painikeet
+    # Piilotetaan ajoneuvon Poista-, Ei käytettävissä ja päivitä kuva -painikeet
     def hideVehicleButtons(self):
         self.ui.removeVehiclePushButton.setHidden(True)
         self.ui.notLendablePushButton.setHidden(True)
+        self.ui.updatePicturePushButton.setHidden(True)
+
 
     def hideDeletePersonPB(self):
         self.ui.deletePersonPushButton.setHidden(True)    
@@ -588,6 +600,31 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
             self.refreshUi()
         except Exception as e:
             self.openWarning('Auton tilaa ei saatu muutettua', str(e))
+        
+    def updatePicture(self):
+        # Määritellään tietokanta-asetukset
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword
+
+        # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Kutsutaan päivitysmetodia
+        # Luetaan kuvatiedosto ja päivitetään auto-taulua
+        with open(self.vehiclePicture, 'rb') as pictureFile:
+            pictureData = pictureFile.read()
+
+        # Luodaan uusi yhteys, koska edellinen suljettiin    
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        try:
+            dbConnection.updateBinaryField('auto', 'kuva', 'rekisterinumero', f"'{self.vehicleToModify}'", pictureData)
+            self.refreshUi()
+            self.ui.updatePicturePushButton.setHidden(True)
+
+        except Exception as e:
+            self.openWarning('Kuvan päivitys ei onnistunut', str(e))
         
 
     def deleteVehicle(self):
@@ -729,7 +766,38 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.statusbar.showMessage(f'valitun auton rekisterinumero on {cellValue}')
         self.ui.removeVehiclePushButton.setHidden(False)
         self.ui.notLendablePushButton.setHidden(False)
+        self.ui.updatePicturePushButton.setHidden(False)
         # self.ui.saveVehiclePushButton.setHidden(True)
+
+        # TODO: Päivitetään kuvakenttään valitun auton kuva
+
+        # Muodostetaan yheys tietokantaan
+
+        # Kuvan näyttö
+
+        try:
+            # Luodaan tietokantayhteys-olio
+            dbConnection = dbOperations.DbConnection(dbSettings)
+            criteria = f"rekisterinumero = '{self.ui.keyBarcodeLineEdit.text()}'"
+
+            # Haetaan auton kuva auto-taulusta
+            resultSet = dbConnection.filterColumsFromTable('auto', ['kuva'], criteria)
+            row = resultSet[0]
+            picture = row[0] # PNG tai JPG kuva tietokannasta
+           
+            # Write the binary data to a file to store png or jpeg data
+            with open('currentCar.png', 'wb') as temporaryFile: 
+                temporaryFile.write(picture)
+
+            # Create a pixmap by reading the file and set label    
+            pixmap = QPixmap('currentCar.png')
+            self.ui.vehiclePictureLabel.setPixmap(pixmap)
+
+        except Exception as e:
+            title = 'Auton kuvan lataaminen ei onnistunut'
+            text = 'Jos mitään tietoja ei tullut näkyviin, ota yhteys henkilökuntaan'
+            detailedText = str(e)
+            self.openWarning(title, text, detailedText)
 
     # Asetetaan poistettavan henkilön HeTu valitun rivin perusteella
     def setSSN(self):
