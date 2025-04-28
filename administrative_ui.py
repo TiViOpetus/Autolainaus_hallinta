@@ -27,23 +27,19 @@ class Ui_MainWindow(object):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
         MainWindow.resize(1009, 585)
-        icon = QIcon()
-        iconThemeName = u"preferences-desktop-accessibility"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon = QIcon.fromTheme(iconThemeName)
-        else:
-            icon.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon = QIcon(QIcon.fromTheme(u"preferences-desktop-accessibility"))
         MainWindow.setWindowIcon(icon)
         self.actionMuokkaa = QAction(MainWindow)
         self.actionMuokkaa.setObjectName(u"actionMuokkaa")
+        self.actionOhjesivut = QAction(MainWindow)
+        self.actionOhjesivut.setObjectName(u"actionOhjesivut")
         self.actionTietoja_ohjelmasta = QAction(MainWindow)
         self.actionTietoja_ohjelmasta.setObjectName(u"actionTietoja_ohjelmasta")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setGeometry(QRect(0, 0, 971, 551))
+        self.tabWidget.setGeometry(QRect(0, 0, 981, 551))
         font = QFont()
         font.setPointSize(10)
         self.tabWidget.setFont(font)
@@ -223,7 +219,7 @@ class Ui_MainWindow(object):
 
         self.layoutWidget_2 = QWidget(self.vehicleTab)
         self.layoutWidget_2.setObjectName(u"layoutWidget_2")
-        self.layoutWidget_2.setGeometry(QRect(120, 0, 169, 242))
+        self.layoutWidget_2.setGeometry(QRect(120, 0, 169, 244))
         self.vehicleInputsVerticalLayout = QVBoxLayout(self.layoutWidget_2)
         self.vehicleInputsVerticalLayout.setObjectName(u"vehicleInputsVerticalLayout")
         self.vehicleInputsVerticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -281,14 +277,14 @@ class Ui_MainWindow(object):
 
         self.saveVehiclePushButton = QPushButton(self.vehicleTab)
         self.saveVehiclePushButton.setObjectName(u"saveVehiclePushButton")
-        self.saveVehiclePushButton.setGeometry(QRect(300, 200, 101, 25))
+        self.saveVehiclePushButton.setGeometry(QRect(300, 230, 101, 25))
         self.saveVehiclePushButton.setFont(font1)
         self.saveVehiclePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.saveVehiclePushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "color: rgb(255, 255, 255);")
         self.printBarcodePushButton = QPushButton(self.vehicleTab)
         self.printBarcodePushButton.setObjectName(u"printBarcodePushButton")
-        self.printBarcodePushButton.setGeometry(QRect(300, 0, 101, 25))
+        self.printBarcodePushButton.setGeometry(QRect(420, 230, 111, 25))
         self.printBarcodePushButton.setFont(font1)
         self.printBarcodePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.printBarcodePushButton.setStyleSheet(u"background-color: rgb(220, 162, 25);\n"
@@ -301,8 +297,8 @@ class Ui_MainWindow(object):
         self.vehicleCatalogTableWidget.setObjectName(u"vehicleCatalogTableWidget")
         self.vehicleCatalogTableWidget.setGeometry(QRect(10, 270, 831, 241))
         self.vehicleCatalogTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ArrowCursor))
-        self.vehicleCatalogTableWidget.setVerticalScrollBarPolicy(Qt.ScrollBarAsNeeded)
-        self.vehicleCatalogTableWidget.setHorizontalScrollBarPolicy(Qt.ScrollBarAsNeeded)
+        self.vehicleCatalogTableWidget.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
+        self.vehicleCatalogTableWidget.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
         self.vehicleCatalogTableWidget.setRowCount(99)
         self.vehicleCatalogTableWidget.setColumnCount(9)
         self.vehicleCatalogTableWidget.horizontalHeader().setProperty(u"showSortIndicator", False)
@@ -312,27 +308,27 @@ class Ui_MainWindow(object):
         self.openPicturePushButton.setGeometry(QRect(301, 90, 101, 51))
         self.openPicturePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.openPicturePushButton.setStyleSheet(u"background-color: rgb(85, 170, 127);")
-        icon1 = QIcon()
-        iconThemeName = u"camera-photo"
-        if QIcon.hasThemeIcon(iconThemeName):
-            icon1 = QIcon.fromTheme(iconThemeName)
-        else:
-            icon1.addFile(u".", QSize(), QIcon.Mode.Normal, QIcon.State.Off)
-
+        icon1 = QIcon(QIcon.fromTheme(u"camera-photo"))
         self.openPicturePushButton.setIcon(icon1)
         self.openPicturePushButton.setIconSize(QSize(24, 24))
         self.vehiclePictureLabel = QLabel(self.vehicleTab)
         self.vehiclePictureLabel.setObjectName(u"vehiclePictureLabel")
-        self.vehiclePictureLabel.setGeometry(QRect(440, 10, 281, 211))
-        self.vehiclePictureLabel.setFrameShape(QFrame.NoFrame)
+        self.vehiclePictureLabel.setGeometry(QRect(550, 10, 281, 211))
+        self.vehiclePictureLabel.setFrameShape(QFrame.Shape.NoFrame)
         self.vehiclePictureLabel.setPixmap(QPixmap(u"uiPictures/noPicture.png"))
         self.vehiclePictureLabel.setScaledContents(True)
         self.removeVehiclePushButton = QPushButton(self.vehicleTab)
         self.removeVehiclePushButton.setObjectName(u"removeVehiclePushButton")
-        self.removeVehiclePushButton.setGeometry(QRect(300, 50, 101, 25))
+        self.removeVehiclePushButton.setGeometry(QRect(550, 230, 101, 25))
         self.removeVehiclePushButton.setFont(font1)
         self.removeVehiclePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.removeVehiclePushButton.setStyleSheet(u"background-color: rgb(255, 0, 0);\n"
+"color: rgb(255, 255, 255);")
+        self.updatePicturePushButton = QPushButton(self.vehicleTab)
+        self.updatePicturePushButton.setObjectName(u"updatePicturePushButton")
+        self.updatePicturePushButton.setGeometry(QRect(420, 100, 91, 24))
+        self.updatePicturePushButton.setFont(font1)
+        self.updatePicturePushButton.setStyleSheet(u"background-color: rgb(85, 85, 255);\n"
 "color: rgb(255, 255, 255);")
         self.tabWidget.addTab(self.vehicleTab, "")
         self.reportsTab = QWidget()
@@ -374,15 +370,15 @@ class Ui_MainWindow(object):
         self.printReportPushButton.setStyleSheet(u"color: rgb(255, 255, 255);\n"
 "background-color: rgb(220, 162, 25);")
         self.diaryTableWidget = QTableWidget(self.reportsTab)
-        if (self.diaryTableWidget.columnCount() < 7):
-            self.diaryTableWidget.setColumnCount(7)
+        if (self.diaryTableWidget.columnCount() < 9):
+            self.diaryTableWidget.setColumnCount(9)
         if (self.diaryTableWidget.rowCount() < 10000):
             self.diaryTableWidget.setRowCount(10000)
         self.diaryTableWidget.setObjectName(u"diaryTableWidget")
-        self.diaryTableWidget.setGeometry(QRect(20, 160, 761, 321))
+        self.diaryTableWidget.setGeometry(QRect(20, 160, 951, 321))
         self.diaryTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ForbiddenCursor))
         self.diaryTableWidget.setRowCount(10000)
-        self.diaryTableWidget.setColumnCount(7)
+        self.diaryTableWidget.setColumnCount(9)
         self.previewLabel = QLabel(self.reportsTab)
         self.previewLabel.setObjectName(u"previewLabel")
         self.previewLabel.setGeometry(QRect(20, 140, 61, 16))
@@ -419,8 +415,8 @@ class Ui_MainWindow(object):
         self.frame = QFrame(self.maintanceTab)
         self.frame.setObjectName(u"frame")
         self.frame.setGeometry(QRect(0, 0, 371, 481))
-        self.frame.setFrameShape(QFrame.StyledPanel)
-        self.frame.setFrameShadow(QFrame.Raised)
+        self.frame.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame.setFrameShadow(QFrame.Shadow.Raised)
         self.vehicleTypeTableWidget = QTableWidget(self.frame)
         if (self.vehicleTypeTableWidget.columnCount() < 1):
             self.vehicleTypeTableWidget.setColumnCount(1)
@@ -455,8 +451,8 @@ class Ui_MainWindow(object):
         self.frame_2 = QFrame(self.maintanceTab)
         self.frame_2.setObjectName(u"frame_2")
         self.frame_2.setGeometry(QRect(390, 0, 371, 481))
-        self.frame_2.setFrameShape(QFrame.StyledPanel)
-        self.frame_2.setFrameShadow(QFrame.Raised)
+        self.frame_2.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
         self.reasonAddTableWidget = QTableWidget(self.frame_2)
         if (self.reasonAddTableWidget.columnCount() < 1):
             self.reasonAddTableWidget.setColumnCount(1)
@@ -491,21 +487,25 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 1009, 21))
+        self.menubar.setGeometry(QRect(0, 0, 1009, 33))
         self.menuAsetukset = QMenu(self.menubar)
         self.menuAsetukset.setObjectName(u"menuAsetukset")
+        self.menuOhje = QMenu(self.menubar)
+        self.menuOhje.setObjectName(u"menuOhje")
         MainWindow.setMenuBar(self.menubar)
         self.statusbar = QStatusBar(MainWindow)
         self.statusbar.setObjectName(u"statusbar")
         MainWindow.setStatusBar(self.statusbar)
 
         self.menubar.addAction(self.menuAsetukset.menuAction())
+        self.menubar.addAction(self.menuOhje.menuAction())
         self.menuAsetukset.addAction(self.actionMuokkaa)
-        self.menuAsetukset.addAction(self.actionTietoja_ohjelmasta)
+        self.menuOhje.addAction(self.actionOhjesivut)
+        self.menuOhje.addAction(self.actionTietoja_ohjelmasta)
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(2)
+        self.tabWidget.setCurrentIndex(1)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -514,7 +514,8 @@ class Ui_MainWindow(object):
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
         self.actionMuokkaa.setText(QCoreApplication.translate("MainWindow", u"Muokkaa...", None))
-        self.actionTietoja_ohjelmasta.setText(QCoreApplication.translate("MainWindow", u"Tietoja ohjelmasta...", None))
+        self.actionOhjesivut.setText(QCoreApplication.translate("MainWindow", u"Ohjesivut", None))
+        self.actionTietoja_ohjelmasta.setText(QCoreApplication.translate("MainWindow", u"Tietoja ohjelmasta", None))
         self.registeredPersonsLabel.setText(QCoreApplication.translate("MainWindow", u"Rekister\u00f6idyt lainaajat", None))
         self.savePersonPushButton.setText(QCoreApplication.translate("MainWindow", u"Tallenna", None))
         self.ssnLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Pakollinen tieto", None))
@@ -558,10 +559,11 @@ class Ui_MainWindow(object):
         self.vehicleOwnerLineEdit.setToolTip(QCoreApplication.translate("MainWindow", u"Valinnainen tieto", None))
 #endif // QT_CONFIG(tooltip)
         self.saveVehiclePushButton.setText(QCoreApplication.translate("MainWindow", u"Tallenna", None))
-        self.printBarcodePushButton.setText(QCoreApplication.translate("MainWindow", u"Viivakoodi", None))
+        self.printBarcodePushButton.setText(QCoreApplication.translate("MainWindow", u"Ei lainattavissa", None))
         self.openPicturePushButton.setText("")
         self.vehiclePictureLabel.setText("")
         self.removeVehiclePushButton.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
+        self.updatePicturePushButton.setText(QCoreApplication.translate("MainWindow", u"P\u00e4ivit\u00e4 kuva", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.vehicleTab), QCoreApplication.translate("MainWindow", u"Autot", None))
         self.reportTypecomboBox.setCurrentText("")
         self.reportTypeLabel.setText(QCoreApplication.translate("MainWindow", u"Raportti", None))
@@ -603,5 +605,6 @@ class Ui_MainWindow(object):
         self.reasonAddLabel.setText(QCoreApplication.translate("MainWindow", u"Ajon tarkoitus", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.maintanceTab), QCoreApplication.translate("MainWindow", u"Yll\u00e4pito", None))
         self.menuAsetukset.setTitle(QCoreApplication.translate("MainWindow", u"Asetukset", None))
+        self.menuOhje.setTitle(QCoreApplication.translate("MainWindow", u"Ohje", None))
     # retranslateUi
 
