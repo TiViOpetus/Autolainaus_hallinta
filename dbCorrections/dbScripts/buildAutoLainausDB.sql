@@ -5,14 +5,12 @@
 CREATE DATABASE autolainaus
     WITH
     OWNER = postgres
-    TEMPLATE =template0
-    ENCODING = 'WIN1252'
-    LC_COLLATE = 'Finnish_Finland.1252'
-    LC_CTYPE = 'Finnish_Finland.1252'
+    ENCODING = 'UTF8'
+    LC_COLLATE = 'fi-FI'
+    LC_CTYPE = 'fi-FI'
     LOCALE_PROVIDER = 'libc'
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1
-    IS_TEMPLATE = False;
 
 COMMENT ON DATABASE autolainaus
     IS 'Rasekon auto-osaston ajopäiväkirjasovellus';
@@ -146,10 +144,15 @@ Lainaus-taulu
 CREATE TABLE IF NOT EXISTS public.lainaus
 (
     lainausnumero serial PRIMARY KEY NOT NULL,
+    tarkoitus character varying(30),
     hetu character(11) NOT NULL,
     rekisterinumero character varying(7) NOT NULL,
-    palautus timestamp without time zone,
+    palautusaika timestamp without time zone,
     lainausaika timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT tarkoitus_lainaus_fk FOREIGN KEY (tarkoitus)
+        REFERENCES public.tarkoitus (tarkoitus) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
     CONSTRAINT auto_lainaus_fk FOREIGN KEY (rekisterinumero)
         REFERENCES public.auto (rekisterinumero) MATCH SIMPLE
         ON UPDATE NO ACTION
