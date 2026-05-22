@@ -22,12 +22,12 @@ class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.resize(301, 234)
+        Dialog.resize(467, 356)
         icon = QIcon(QIcon.fromTheme(u"applications-development"))
         Dialog.setWindowIcon(icon)
         self.saveSettingspushButton = QPushButton(Dialog)
         self.saveSettingspushButton.setObjectName(u"saveSettingspushButton")
-        self.saveSettingspushButton.setGeometry(QRect(210, 180, 81, 23))
+        self.saveSettingspushButton.setGeometry(QRect(210, 210, 81, 23))
         font = QFont()
         font.setPointSize(8)
         font.setBold(True)
@@ -37,7 +37,7 @@ class Ui_Dialog(object):
 "color: rgb(255, 255, 255);")
         self.layoutWidget = QWidget(Dialog)
         self.layoutWidget.setObjectName(u"layoutWidget")
-        self.layoutWidget.setGeometry(QRect(110, 10, 181, 156))
+        self.layoutWidget.setGeometry(QRect(110, 10, 181, 191))
         self.verticalLayout = QVBoxLayout(self.layoutWidget)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
@@ -74,9 +74,14 @@ class Ui_Dialog(object):
 
         self.verticalLayout.addWidget(self.paswordLineEdit)
 
+        self.divisionLineEdit = QLineEdit(self.layoutWidget)
+        self.divisionLineEdit.setObjectName(u"divisionLineEdit")
+
+        self.verticalLayout.addWidget(self.divisionLineEdit)
+
         self.layoutWidget_2 = QWidget(Dialog)
         self.layoutWidget_2.setObjectName(u"layoutWidget_2")
-        self.layoutWidget_2.setGeometry(QRect(10, 10, 86, 141))
+        self.layoutWidget_2.setGeometry(QRect(10, 10, 86, 191))
         self.verticalLayout_2 = QVBoxLayout(self.layoutWidget_2)
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
@@ -112,9 +117,15 @@ class Ui_Dialog(object):
 
         self.verticalLayout_2.addWidget(self.passwordLabel)
 
+        self.label = QLabel(self.layoutWidget_2)
+        self.label.setObjectName(u"label")
+        self.label.setFont(font2)
+
+        self.verticalLayout_2.addWidget(self.label)
+
         self.closePushButton = QPushButton(Dialog)
         self.closePushButton.setObjectName(u"closePushButton")
-        self.closePushButton.setGeometry(QRect(110, 180, 75, 24))
+        self.closePushButton.setGeometry(QRect(110, 210, 75, 24))
 
         self.retranslateUi(Dialog)
 
@@ -142,11 +153,15 @@ class Ui_Dialog(object):
 #if QT_CONFIG(tooltip)
         self.paswordLineEdit.setToolTip(QCoreApplication.translate("Dialog", u"<html><head/><body><p><span style=\" font-size:10pt;\">Salasana</span></p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(tooltip)
+        self.divisionLineEdit.setToolTip(QCoreApplication.translate("Dialog", u"Oman osaston nimi", None))
+#endif // QT_CONFIG(tooltip)
         self.ServerLabel.setText(QCoreApplication.translate("Dialog", u"Palvelin", None))
         self.portLabel.setText(QCoreApplication.translate("Dialog", u"Portti", None))
         self.databaseLabel.setText(QCoreApplication.translate("Dialog", u"Tietokanta", None))
         self.userLabel.setText(QCoreApplication.translate("Dialog", u"K\u00e4ytt\u00e4j\u00e4tunnus", None))
         self.passwordLabel.setText(QCoreApplication.translate("Dialog", u"Salasana", None))
+        self.label.setText(QCoreApplication.translate("Dialog", u"Osasto", None))
         self.closePushButton.setText(QCoreApplication.translate("Dialog", u"Sulje", None))
     # retranslateUi
 

@@ -106,6 +106,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.reasonDeltePushButton.clicked.connect(self.deleteReason)
         self.ui.vehicleTypeDeletePushButton.clicked.connect(self.deleteVehicleType)
         self.ui.updatePicturePushButton.clicked.connect(self.updatePicture)
+        self.ui.divisionAddPushButton.clicked.connect(self.newDivision)
 
         # Taulukoiden solujen klikkaaminen
         self.ui.vehicleCatalogTableWidget.cellClicked.connect(self.setRegisterNumber)
@@ -216,6 +217,19 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.vehicleTypeComboBox.clear()
         self.ui.vehicleTypeComboBox.addItems(typeStringList)
 
+        # Tehdään lista osastoista yhdistelmäruutua varten
+        divisionList = dbConnection.readColumsFromTable('osasto', ['osasto'])
+        divisionStringList = []
+        
+        for division in divisionList:
+            divisionString = str(division[0])
+            divisionStringList.append(divisionString)
+
+        self.ui.divisionComboBox.clear()
+        self.ui.divisionComboBox.addItems(divisionStringList)
+
+
+
         # Lista ajopäiväkirjoista -> raporttinäkymien nimet
         self.ui.reportTypecomboBox.clear()
         self.ui.reportTypecomboBox.addItems(['ajopaivakirja', 'autoittain'])
@@ -266,14 +280,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         dbConnection = dbOperations.DbConnection(dbSettings)
 
         # Tehdään lista lainaaja-taulun tiedoista
-        tableData = dbConnection.readAllColumnsFromTable('auto')
-        
+        columnList = ['rekisterinumero', 'deviceid', 'merkki', 'malli', 'vuosimalli', 'tyyppi','henkilomaara', 'automaatti', 'osasto', 'vastuuhenkilo', 'kaytettavissa']
+        tableData = dbConnection.readColumsFromTable('auto', columnList)
 
         # Tyhjennetään vanhat tiedot käyttöliittymästä ennen uusien lukemista tietokannasta
         self.ui.vehicleCatalogTableWidget.clearContents()
 
         # Määritellään taulukkoelementin otsikot
-        headerRow = ['Rekisteri','Käytettävissä', 'Merkki', 'Malli', 'Vuosimalli', 'Henkilömäärä', 'Tyyppi', 'Automaatti', 'Vastuuhenkilö']
+        headerRow = ['Rekisteri','PaikanninID', 'Merkki', 'Malli', 'Vuosimalli', 'Tyyppi', 'Henkilömäärä', 'Automaatti', 'Osasto', 'Vastuuhenkilö', 'Käytettävissä']
         self.ui.vehicleCatalogTableWidget.setHorizontalHeaderLabels(headerRow)
 
         # Asetetaan taulukon solujen arvot
@@ -333,6 +347,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.diaryTableWidget.clearContents()
 
         # Määritellään taulukkoelementin otsikot
+        # FIXME: Tässä on jokin virhe, koska malli ei näy. Korjattu tietokannan näkymään puuttunut sarake (malli)
         headerRow = ['Rekisteri', 'Merkki', 'Malli', 'Tarkoitus', 'HeTu', 'Sukunimi', 'Etunimi', 'Otettu', 'Palautettu']
         self.ui.diaryTableWidget.setHorizontalHeaderLabels(headerRow)
 
@@ -542,12 +557,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Luetaan syöttöelementtien arvot paikallisiin muuttujiin
         numberPlate = self.ui.numberPlateLineEdit.text()
+        deviceId = self.ui.deviceIdLineEdit.text()
         manufacturer = self.ui.manufacturerLineEdit.text()
         model = self.ui.modelLineEdit.text()
         year = self.ui.modelYearLineEdit.text()
         capacity = int(self.ui.capacityLineEdit.text())
         vehicleType = self.ui.vehicleTypeComboBox.currentText()
         automaticGearBox = self.ui.agbCheckBox.isChecked()
+        division = self.ui.divisionComboBox.currentText()
         responsiblePerson = self.ui.vehicleOwnerLineEdit.text()
 
         # Määritellään tallennusmetodin vaatimat parametrit
@@ -559,7 +576,9 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                           'henkilomaara': capacity,
                           'tyyppi': vehicleType,
                           'automaatti': automaticGearBox,
-                          'vastuuhenkilo': responsiblePerson
+                          'vastuuhenkilo': responsiblePerson,
+                          'deviceid': deviceId,
+                          'osasto': division
                           }
         
         # Luodaan tietokantayhteys-olio
@@ -717,6 +736,30 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         except Exception as e:
             self.openWarning('Tallennus ei onnistunut', str(e))
 
+    def newDivision(self):
+         # Määritellään tietokanta-asetukset
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword
+
+        # Luetaan syöttöelementtien arvot paikallisiin muuttujiin
+        division = self.ui.divisionAddLineEdit.text()
+
+        # Määritellään tallennusmetodin vaatimat parametrit
+        tableName = 'osasto'
+        typeDictionary = {'osasto': division}
+        
+        # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Kutsutaan tallennusmetodia
+        try:
+            dbConnection.addToTable(tableName, typeDictionary)
+            self.refreshUi() # Päivitetään taulukko lisäyksen jälkeen
+                   
+            
+        except Exception as e:
+            self.openWarning('Tallennus ei onnistunut', str(e))
 
     # Poistetaan ajon tarkoitus
     def deleteReason(self):
@@ -894,6 +937,7 @@ class SaveSettingsDialog(QtWidgets.QDialog, Settings_Dialog):
             self.ui.userLineEdit.setText(self.currentSettings['userName'])
             plaintextPassword = cipher.decryptString(self.currentSettings['password'])
             self.ui.paswordLineEdit.setText(plaintextPassword)
+            self.ui.divisionLineEdit.setText(self.currentSettings['division'])
         except Exception as e:
             self.openInfo()
         

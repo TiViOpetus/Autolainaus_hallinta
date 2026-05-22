@@ -17,10 +17,10 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QDateEdit,
-    QFrame, QHeaderView, QLabel, QLineEdit,
-    QMainWindow, QMenu, QMenuBar, QPushButton,
-    QSizePolicy, QStatusBar, QTabWidget, QTableWidget,
-    QTableWidgetItem, QVBoxLayout, QWidget)
+    QFrame, QGridLayout, QHeaderView, QLabel,
+    QLineEdit, QMainWindow, QMenu, QMenuBar,
+    QPushButton, QSizePolicy, QStatusBar, QTabWidget,
+    QTableWidget, QTableWidgetItem, QVBoxLayout, QWidget)
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
@@ -39,7 +39,7 @@ class Ui_MainWindow(object):
         self.centralwidget.setObjectName(u"centralwidget")
         self.tabWidget = QTabWidget(self.centralwidget)
         self.tabWidget.setObjectName(u"tabWidget")
-        self.tabWidget.setGeometry(QRect(0, 0, 971, 551))
+        self.tabWidget.setGeometry(QRect(0, 20, 971, 551))
         font = QFont()
         font.setPointSize(10)
         self.tabWidget.setFont(font)
@@ -171,170 +171,206 @@ class Ui_MainWindow(object):
         self.vehicleTab = QWidget()
         self.vehicleTab.setObjectName(u"vehicleTab")
         self.vehicleTab.setCursor(QCursor(Qt.CursorShape.ArrowCursor))
-        self.layoutWidget2 = QWidget(self.vehicleTab)
-        self.layoutWidget2.setObjectName(u"layoutWidget2")
-        self.layoutWidget2.setGeometry(QRect(10, 0, 101, 241))
-        self.vehicleLabelsVerticalLayout = QVBoxLayout(self.layoutWidget2)
-        self.vehicleLabelsVerticalLayout.setObjectName(u"vehicleLabelsVerticalLayout")
-        self.vehicleLabelsVerticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.numberPlateLabel = QLabel(self.layoutWidget2)
-        self.numberPlateLabel.setObjectName(u"numberPlateLabel")
-        self.numberPlateLabel.setFont(font)
-
-        self.vehicleLabelsVerticalLayout.addWidget(self.numberPlateLabel)
-
-        self.manufacturerLabel = QLabel(self.layoutWidget2)
-        self.manufacturerLabel.setObjectName(u"manufacturerLabel")
-        self.manufacturerLabel.setFont(font)
-
-        self.vehicleLabelsVerticalLayout.addWidget(self.manufacturerLabel)
-
-        self.modelLabel = QLabel(self.layoutWidget2)
-        self.modelLabel.setObjectName(u"modelLabel")
-        self.modelLabel.setFont(font)
-
-        self.vehicleLabelsVerticalLayout.addWidget(self.modelLabel)
-
-        self.modelYearLabel = QLabel(self.layoutWidget2)
-        self.modelYearLabel.setObjectName(u"modelYearLabel")
-        self.modelYearLabel.setFont(font)
-
-        self.vehicleLabelsVerticalLayout.addWidget(self.modelYearLabel)
-
-        self.capacityLabel = QLabel(self.layoutWidget2)
-        self.capacityLabel.setObjectName(u"capacityLabel")
-        self.capacityLabel.setFont(font)
-
-        self.vehicleLabelsVerticalLayout.addWidget(self.capacityLabel)
-
-        self.vehicleTypeLabel = QLabel(self.layoutWidget2)
-        self.vehicleTypeLabel.setObjectName(u"vehicleTypeLabel")
-
-        self.vehicleLabelsVerticalLayout.addWidget(self.vehicleTypeLabel)
-
-        self.agbLabel = QLabel(self.layoutWidget2)
-        self.agbLabel.setObjectName(u"agbLabel")
-
-        self.vehicleLabelsVerticalLayout.addWidget(self.agbLabel)
-
-        self.vehicleOwnerLabel = QLabel(self.layoutWidget2)
-        self.vehicleOwnerLabel.setObjectName(u"vehicleOwnerLabel")
-
-        self.vehicleLabelsVerticalLayout.addWidget(self.vehicleOwnerLabel)
-
-        self.layoutWidget_2 = QWidget(self.vehicleTab)
-        self.layoutWidget_2.setObjectName(u"layoutWidget_2")
-        self.layoutWidget_2.setGeometry(QRect(120, 0, 169, 245))
-        self.vehicleInputsVerticalLayout = QVBoxLayout(self.layoutWidget_2)
-        self.vehicleInputsVerticalLayout.setObjectName(u"vehicleInputsVerticalLayout")
-        self.vehicleInputsVerticalLayout.setContentsMargins(0, 0, 0, 0)
-        self.numberPlateLineEdit = QLineEdit(self.layoutWidget_2)
-        self.numberPlateLineEdit.setObjectName(u"numberPlateLineEdit")
-        self.numberPlateLineEdit.setFont(font2)
-        self.numberPlateLineEdit.setClearButtonEnabled(True)
-
-        self.vehicleInputsVerticalLayout.addWidget(self.numberPlateLineEdit)
-
-        self.manufacturerLineEdit = QLineEdit(self.layoutWidget_2)
-        self.manufacturerLineEdit.setObjectName(u"manufacturerLineEdit")
-        self.manufacturerLineEdit.setFont(font2)
-        self.manufacturerLineEdit.setClearButtonEnabled(True)
-
-        self.vehicleInputsVerticalLayout.addWidget(self.manufacturerLineEdit)
-
-        self.modelLineEdit = QLineEdit(self.layoutWidget_2)
-        self.modelLineEdit.setObjectName(u"modelLineEdit")
-        self.modelLineEdit.setFont(font2)
-        self.modelLineEdit.setClearButtonEnabled(True)
-
-        self.vehicleInputsVerticalLayout.addWidget(self.modelLineEdit)
-
-        self.modelYearLineEdit = QLineEdit(self.layoutWidget_2)
-        self.modelYearLineEdit.setObjectName(u"modelYearLineEdit")
-        self.modelYearLineEdit.setFont(font2)
-        self.modelYearLineEdit.setClearButtonEnabled(True)
-
-        self.vehicleInputsVerticalLayout.addWidget(self.modelYearLineEdit)
-
-        self.capacityLineEdit = QLineEdit(self.layoutWidget_2)
-        self.capacityLineEdit.setObjectName(u"capacityLineEdit")
-        self.capacityLineEdit.setFont(font2)
-        self.capacityLineEdit.setClearButtonEnabled(True)
-
-        self.vehicleInputsVerticalLayout.addWidget(self.capacityLineEdit)
-
-        self.vehicleTypeComboBox = QComboBox(self.layoutWidget_2)
-        self.vehicleTypeComboBox.setObjectName(u"vehicleTypeComboBox")
-        self.vehicleTypeComboBox.setFont(font2)
-
-        self.vehicleInputsVerticalLayout.addWidget(self.vehicleTypeComboBox)
-
-        self.agbCheckBox = QCheckBox(self.layoutWidget_2)
-        self.agbCheckBox.setObjectName(u"agbCheckBox")
-
-        self.vehicleInputsVerticalLayout.addWidget(self.agbCheckBox)
-
-        self.vehicleOwnerLineEdit = QLineEdit(self.layoutWidget_2)
-        self.vehicleOwnerLineEdit.setObjectName(u"vehicleOwnerLineEdit")
-        self.vehicleOwnerLineEdit.setClearButtonEnabled(True)
-
-        self.vehicleInputsVerticalLayout.addWidget(self.vehicleOwnerLineEdit)
-
-        self.saveVehiclePushButton = QPushButton(self.vehicleTab)
-        self.saveVehiclePushButton.setObjectName(u"saveVehiclePushButton")
-        self.saveVehiclePushButton.setGeometry(QRect(300, 220, 101, 25))
-        self.saveVehiclePushButton.setFont(font1)
-        self.saveVehiclePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.saveVehiclePushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
-"color: rgb(255, 255, 255);")
         self.vehicleCatalogTableWidget = QTableWidget(self.vehicleTab)
         if (self.vehicleCatalogTableWidget.columnCount() < 10):
             self.vehicleCatalogTableWidget.setColumnCount(10)
         if (self.vehicleCatalogTableWidget.rowCount() < 99):
             self.vehicleCatalogTableWidget.setRowCount(99)
         self.vehicleCatalogTableWidget.setObjectName(u"vehicleCatalogTableWidget")
-        self.vehicleCatalogTableWidget.setGeometry(QRect(10, 270, 941, 241))
+        self.vehicleCatalogTableWidget.setGeometry(QRect(10, 290, 961, 181))
         self.vehicleCatalogTableWidget.viewport().setProperty(u"cursor", QCursor(Qt.CursorShape.ArrowCursor))
         self.vehicleCatalogTableWidget.setVerticalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAsNeeded)
-        self.vehicleCatalogTableWidget.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.vehicleCatalogTableWidget.setHorizontalScrollBarPolicy(Qt.ScrollBarPolicy.ScrollBarAlwaysOn)
         self.vehicleCatalogTableWidget.setRowCount(99)
         self.vehicleCatalogTableWidget.setColumnCount(10)
         self.vehicleCatalogTableWidget.horizontalHeader().setProperty(u"showSortIndicator", False)
         self.vehicleCatalogTableWidget.verticalHeader().setProperty(u"showSortIndicator", False)
-        self.openPicturePushButton = QPushButton(self.vehicleTab)
-        self.openPicturePushButton.setObjectName(u"openPicturePushButton")
-        self.openPicturePushButton.setGeometry(QRect(301, 90, 101, 51))
-        self.openPicturePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.openPicturePushButton.setStyleSheet(u"background-color: rgb(85, 170, 127);")
-        icon1 = QIcon(QIcon.fromTheme(u"camera-photo"))
-        self.openPicturePushButton.setIcon(icon1)
-        self.openPicturePushButton.setIconSize(QSize(24, 24))
         self.vehiclePictureLabel = QLabel(self.vehicleTab)
         self.vehiclePictureLabel.setObjectName(u"vehiclePictureLabel")
         self.vehiclePictureLabel.setGeometry(QRect(670, 20, 281, 211))
         self.vehiclePictureLabel.setFrameShape(QFrame.Shape.NoFrame)
         self.vehiclePictureLabel.setPixmap(QPixmap(u"uiPictures/noPicture.png"))
         self.vehiclePictureLabel.setScaledContents(True)
-        self.removeVehiclePushButton = QPushButton(self.vehicleTab)
-        self.removeVehiclePushButton.setObjectName(u"removeVehiclePushButton")
-        self.removeVehiclePushButton.setGeometry(QRect(530, 220, 101, 25))
-        self.removeVehiclePushButton.setFont(font1)
-        self.removeVehiclePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
-        self.removeVehiclePushButton.setStyleSheet(u"background-color: rgb(255, 0, 0);\n"
+        self.widget = QWidget(self.vehicleTab)
+        self.widget.setObjectName(u"widget")
+        self.widget.setGeometry(QRect(10, 0, 544, 278))
+        self.gridLayout = QGridLayout(self.widget)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.vehicleLabelsVerticalLayout = QVBoxLayout()
+        self.vehicleLabelsVerticalLayout.setObjectName(u"vehicleLabelsVerticalLayout")
+        self.numberPlateLabel = QLabel(self.widget)
+        self.numberPlateLabel.setObjectName(u"numberPlateLabel")
+        self.numberPlateLabel.setFont(font)
+
+        self.vehicleLabelsVerticalLayout.addWidget(self.numberPlateLabel)
+
+        self.manufacturerLabel = QLabel(self.widget)
+        self.manufacturerLabel.setObjectName(u"manufacturerLabel")
+        self.manufacturerLabel.setFont(font)
+
+        self.vehicleLabelsVerticalLayout.addWidget(self.manufacturerLabel)
+
+        self.modelLabel = QLabel(self.widget)
+        self.modelLabel.setObjectName(u"modelLabel")
+        self.modelLabel.setFont(font)
+
+        self.vehicleLabelsVerticalLayout.addWidget(self.modelLabel)
+
+        self.modelYearLabel = QLabel(self.widget)
+        self.modelYearLabel.setObjectName(u"modelYearLabel")
+        self.modelYearLabel.setFont(font)
+
+        self.vehicleLabelsVerticalLayout.addWidget(self.modelYearLabel)
+
+        self.capacityLabel = QLabel(self.widget)
+        self.capacityLabel.setObjectName(u"capacityLabel")
+        self.capacityLabel.setFont(font)
+
+        self.vehicleLabelsVerticalLayout.addWidget(self.capacityLabel)
+
+        self.vehicleTypeLabel = QLabel(self.widget)
+        self.vehicleTypeLabel.setObjectName(u"vehicleTypeLabel")
+
+        self.vehicleLabelsVerticalLayout.addWidget(self.vehicleTypeLabel)
+
+        self.agbLabel = QLabel(self.widget)
+        self.agbLabel.setObjectName(u"agbLabel")
+
+        self.vehicleLabelsVerticalLayout.addWidget(self.agbLabel)
+
+        self.divisionLabel = QLabel(self.widget)
+        self.divisionLabel.setObjectName(u"divisionLabel")
+
+        self.vehicleLabelsVerticalLayout.addWidget(self.divisionLabel)
+
+        self.vehicleOwnerLabel = QLabel(self.widget)
+        self.vehicleOwnerLabel.setObjectName(u"vehicleOwnerLabel")
+
+        self.vehicleLabelsVerticalLayout.addWidget(self.vehicleOwnerLabel)
+
+
+        self.gridLayout.addLayout(self.vehicleLabelsVerticalLayout, 0, 0, 3, 1)
+
+        self.vehicleInputsVerticalLayout = QVBoxLayout()
+        self.vehicleInputsVerticalLayout.setObjectName(u"vehicleInputsVerticalLayout")
+        self.numberPlateLineEdit = QLineEdit(self.widget)
+        self.numberPlateLineEdit.setObjectName(u"numberPlateLineEdit")
+        self.numberPlateLineEdit.setFont(font2)
+        self.numberPlateLineEdit.setClearButtonEnabled(True)
+
+        self.vehicleInputsVerticalLayout.addWidget(self.numberPlateLineEdit)
+
+        self.manufacturerLineEdit = QLineEdit(self.widget)
+        self.manufacturerLineEdit.setObjectName(u"manufacturerLineEdit")
+        self.manufacturerLineEdit.setFont(font2)
+        self.manufacturerLineEdit.setClearButtonEnabled(True)
+
+        self.vehicleInputsVerticalLayout.addWidget(self.manufacturerLineEdit)
+
+        self.modelLineEdit = QLineEdit(self.widget)
+        self.modelLineEdit.setObjectName(u"modelLineEdit")
+        self.modelLineEdit.setFont(font2)
+        self.modelLineEdit.setClearButtonEnabled(True)
+
+        self.vehicleInputsVerticalLayout.addWidget(self.modelLineEdit)
+
+        self.modelYearLineEdit = QLineEdit(self.widget)
+        self.modelYearLineEdit.setObjectName(u"modelYearLineEdit")
+        self.modelYearLineEdit.setFont(font2)
+        self.modelYearLineEdit.setClearButtonEnabled(True)
+
+        self.vehicleInputsVerticalLayout.addWidget(self.modelYearLineEdit)
+
+        self.capacityLineEdit = QLineEdit(self.widget)
+        self.capacityLineEdit.setObjectName(u"capacityLineEdit")
+        self.capacityLineEdit.setFont(font2)
+        self.capacityLineEdit.setClearButtonEnabled(True)
+
+        self.vehicleInputsVerticalLayout.addWidget(self.capacityLineEdit)
+
+        self.vehicleTypeComboBox = QComboBox(self.widget)
+        self.vehicleTypeComboBox.setObjectName(u"vehicleTypeComboBox")
+        self.vehicleTypeComboBox.setFont(font2)
+
+        self.vehicleInputsVerticalLayout.addWidget(self.vehicleTypeComboBox)
+
+        self.agbCheckBox = QCheckBox(self.widget)
+        self.agbCheckBox.setObjectName(u"agbCheckBox")
+
+        self.vehicleInputsVerticalLayout.addWidget(self.agbCheckBox)
+
+        self.divisionComboBox = QComboBox(self.widget)
+        self.divisionComboBox.setObjectName(u"divisionComboBox")
+        self.divisionComboBox.setFont(font2)
+
+        self.vehicleInputsVerticalLayout.addWidget(self.divisionComboBox)
+
+        self.vehicleOwnerLineEdit = QLineEdit(self.widget)
+        self.vehicleOwnerLineEdit.setObjectName(u"vehicleOwnerLineEdit")
+        self.vehicleOwnerLineEdit.setClearButtonEnabled(True)
+
+        self.vehicleInputsVerticalLayout.addWidget(self.vehicleOwnerLineEdit)
+
+
+        self.gridLayout.addLayout(self.vehicleInputsVerticalLayout, 0, 1, 3, 1)
+
+        self.label = QLabel(self.widget)
+        self.label.setObjectName(u"label")
+
+        self.gridLayout.addWidget(self.label, 0, 2, 1, 1)
+
+        self.deviceIdLineEdit = QLineEdit(self.widget)
+        self.deviceIdLineEdit.setObjectName(u"deviceIdLineEdit")
+        self.deviceIdLineEdit.setFont(font2)
+
+        self.gridLayout.addWidget(self.deviceIdLineEdit, 0, 3, 1, 2)
+
+        self.openPicturePushButton = QPushButton(self.widget)
+        self.openPicturePushButton.setObjectName(u"openPicturePushButton")
+        self.openPicturePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.openPicturePushButton.setStyleSheet(u"background-color: rgb(85, 170, 127);")
+        icon1 = QIcon(QIcon.fromTheme(u"camera-photo"))
+        self.openPicturePushButton.setIcon(icon1)
+        self.openPicturePushButton.setIconSize(QSize(24, 24))
+
+        self.gridLayout.addWidget(self.openPicturePushButton, 1, 2, 1, 1)
+
+        self.updatePicturePushButton = QPushButton(self.widget)
+        self.updatePicturePushButton.setObjectName(u"updatePicturePushButton")
+        self.updatePicturePushButton.setFont(font1)
+        self.updatePicturePushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
 "color: rgb(255, 255, 255);")
-        self.notLendablePushButton = QPushButton(self.vehicleTab)
+
+        self.gridLayout.addWidget(self.updatePicturePushButton, 1, 3, 1, 1)
+
+        self.saveVehiclePushButton = QPushButton(self.widget)
+        self.saveVehiclePushButton.setObjectName(u"saveVehiclePushButton")
+        self.saveVehiclePushButton.setFont(font1)
+        self.saveVehiclePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.saveVehiclePushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
+"color: rgb(255, 255, 255);")
+
+        self.gridLayout.addWidget(self.saveVehiclePushButton, 2, 2, 1, 1)
+
+        self.notLendablePushButton = QPushButton(self.widget)
         self.notLendablePushButton.setObjectName(u"notLendablePushButton")
-        self.notLendablePushButton.setGeometry(QRect(410, 220, 111, 25))
         self.notLendablePushButton.setFont(font1)
         self.notLendablePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.notLendablePushButton.setStyleSheet(u"background-color: rgb(255, 170, 0);\n"
 "color: rgb(255, 255, 255);")
-        self.updatePicturePushButton = QPushButton(self.vehicleTab)
-        self.updatePicturePushButton.setObjectName(u"updatePicturePushButton")
-        self.updatePicturePushButton.setGeometry(QRect(420, 90, 101, 51))
-        self.updatePicturePushButton.setFont(font1)
-        self.updatePicturePushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
+
+        self.gridLayout.addWidget(self.notLendablePushButton, 2, 3, 1, 1)
+
+        self.removeVehiclePushButton = QPushButton(self.widget)
+        self.removeVehiclePushButton.setObjectName(u"removeVehiclePushButton")
+        self.removeVehiclePushButton.setFont(font1)
+        self.removeVehiclePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.removeVehiclePushButton.setStyleSheet(u"background-color: rgb(255, 0, 0);\n"
 "color: rgb(255, 255, 255);")
+
+        self.gridLayout.addWidget(self.removeVehiclePushButton, 2, 4, 1, 1)
+
         self.tabWidget.addTab(self.vehicleTab, "")
         self.reportsTab = QWidget()
         self.reportsTab.setObjectName(u"reportsTab")
@@ -424,7 +460,7 @@ class Ui_MainWindow(object):
         self.maintenanceTab.setObjectName(u"maintenanceTab")
         self.frame = QFrame(self.maintenanceTab)
         self.frame.setObjectName(u"frame")
-        self.frame.setGeometry(QRect(10, 10, 371, 451))
+        self.frame.setGeometry(QRect(10, 10, 371, 231))
         self.frame.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame.setFrameShadow(QFrame.Shadow.Raised)
         self.vehicleTypeTableWidget = QTableWidget(self.frame)
@@ -433,7 +469,7 @@ class Ui_MainWindow(object):
         if (self.vehicleTypeTableWidget.rowCount() < 10):
             self.vehicleTypeTableWidget.setRowCount(10)
         self.vehicleTypeTableWidget.setObjectName(u"vehicleTypeTableWidget")
-        self.vehicleTypeTableWidget.setGeometry(QRect(10, 70, 341, 211))
+        self.vehicleTypeTableWidget.setGeometry(QRect(10, 70, 341, 121))
         self.vehicleTypeTableWidget.setSortingEnabled(True)
         self.vehicleTypeTableWidget.setRowCount(10)
         self.vehicleTypeTableWidget.setColumnCount(1)
@@ -451,7 +487,7 @@ class Ui_MainWindow(object):
 "color: rgb(255, 255, 255);")
         self.vehicleTypeDeletePushButton = QPushButton(self.frame)
         self.vehicleTypeDeletePushButton.setObjectName(u"vehicleTypeDeletePushButton")
-        self.vehicleTypeDeletePushButton.setGeometry(QRect(280, 300, 75, 24))
+        self.vehicleTypeDeletePushButton.setGeometry(QRect(280, 200, 75, 24))
         self.vehicleTypeDeletePushButton.setFont(font1)
         self.vehicleTypeDeletePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.vehicleTypeDeletePushButton.setStyleSheet(u"background-color: rgb(255, 0, 0);\n"
@@ -461,7 +497,7 @@ class Ui_MainWindow(object):
         self.vehicleTypeAddLabel.setGeometry(QRect(10, 10, 101, 16))
         self.frame_2 = QFrame(self.maintenanceTab)
         self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setGeometry(QRect(400, 10, 371, 451))
+        self.frame_2.setGeometry(QRect(400, 10, 371, 471))
         self.frame_2.setFrameShape(QFrame.Shape.StyledPanel)
         self.frame_2.setFrameShadow(QFrame.Shadow.Raised)
         self.reasonAddTableWidget = QTableWidget(self.frame_2)
@@ -470,7 +506,7 @@ class Ui_MainWindow(object):
         if (self.reasonAddTableWidget.rowCount() < 10):
             self.reasonAddTableWidget.setRowCount(10)
         self.reasonAddTableWidget.setObjectName(u"reasonAddTableWidget")
-        self.reasonAddTableWidget.setGeometry(QRect(10, 70, 341, 211))
+        self.reasonAddTableWidget.setGeometry(QRect(10, 70, 341, 361))
         self.reasonAddTableWidget.setRowCount(10)
         self.reasonAddTableWidget.setColumnCount(1)
         self.reasonAddTableWidget.horizontalHeader().setProperty(u"showSortIndicator", True)
@@ -487,7 +523,7 @@ class Ui_MainWindow(object):
 "color: rgb(255, 255, 255);")
         self.reasonDeltePushButton = QPushButton(self.frame_2)
         self.reasonDeltePushButton.setObjectName(u"reasonDeltePushButton")
-        self.reasonDeltePushButton.setGeometry(QRect(280, 300, 75, 24))
+        self.reasonDeltePushButton.setGeometry(QRect(270, 440, 75, 24))
         self.reasonDeltePushButton.setFont(font1)
         self.reasonDeltePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
         self.reasonDeltePushButton.setStyleSheet(u"background-color: rgb(255, 0, 0);\n"
@@ -495,6 +531,43 @@ class Ui_MainWindow(object):
         self.reasonAddLabel = QLabel(self.frame_2)
         self.reasonAddLabel.setObjectName(u"reasonAddLabel")
         self.reasonAddLabel.setGeometry(QRect(10, 10, 111, 16))
+        self.frame_3 = QFrame(self.maintenanceTab)
+        self.frame_3.setObjectName(u"frame_3")
+        self.frame_3.setGeometry(QRect(10, 250, 371, 231))
+        self.frame_3.setFrameShape(QFrame.Shape.StyledPanel)
+        self.frame_3.setFrameShadow(QFrame.Shadow.Raised)
+        self.divisionTableWidget = QTableWidget(self.frame_3)
+        if (self.divisionTableWidget.columnCount() < 1):
+            self.divisionTableWidget.setColumnCount(1)
+        if (self.divisionTableWidget.rowCount() < 10):
+            self.divisionTableWidget.setRowCount(10)
+        self.divisionTableWidget.setObjectName(u"divisionTableWidget")
+        self.divisionTableWidget.setGeometry(QRect(10, 80, 341, 111))
+        self.divisionTableWidget.setSortingEnabled(True)
+        self.divisionTableWidget.setRowCount(10)
+        self.divisionTableWidget.setColumnCount(1)
+        self.divisionTableWidget.horizontalHeader().setStretchLastSection(True)
+        self.divisionTableWidget.verticalHeader().setStretchLastSection(False)
+        self.divisionAddLabel = QLabel(self.frame_3)
+        self.divisionAddLabel.setObjectName(u"divisionAddLabel")
+        self.divisionAddLabel.setGeometry(QRect(10, 10, 101, 16))
+        self.divisionAddLineEdit = QLineEdit(self.frame_3)
+        self.divisionAddLineEdit.setObjectName(u"divisionAddLineEdit")
+        self.divisionAddLineEdit.setGeometry(QRect(10, 30, 231, 22))
+        self.divisionAddPushButton = QPushButton(self.frame_3)
+        self.divisionAddPushButton.setObjectName(u"divisionAddPushButton")
+        self.divisionAddPushButton.setGeometry(QRect(280, 30, 75, 24))
+        self.divisionAddPushButton.setFont(font1)
+        self.divisionAddPushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.divisionAddPushButton.setStyleSheet(u"background-color: rgb(57, 136, 220);\n"
+"color: rgb(255, 255, 255);")
+        self.divisionDeletePushButton = QPushButton(self.frame_3)
+        self.divisionDeletePushButton.setObjectName(u"divisionDeletePushButton")
+        self.divisionDeletePushButton.setGeometry(QRect(280, 200, 75, 24))
+        self.divisionDeletePushButton.setFont(font1)
+        self.divisionDeletePushButton.setCursor(QCursor(Qt.CursorShape.PointingHandCursor))
+        self.divisionDeletePushButton.setStyleSheet(u"background-color: rgb(255, 0, 0);\n"
+"color: rgb(255, 255, 255);")
         self.tabWidget.addTab(self.maintenanceTab, "")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(MainWindow)
@@ -517,7 +590,7 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
 
-        self.tabWidget.setCurrentIndex(1)
+        self.tabWidget.setCurrentIndex(3)
 
 
         QMetaObject.connectSlotsByName(MainWindow)
@@ -550,6 +623,10 @@ class Ui_MainWindow(object):
         self.emailLabel.setText(QCoreApplication.translate("MainWindow", u"S\u00e4hk\u00f6posti", None))
         self.deletePersonPushButton.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.lenderTab), QCoreApplication.translate("MainWindow", u"Lainaajat", None))
+#if QT_CONFIG(tooltip)
+        self.vehicleCatalogTableWidget.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Valitse auto klikkaamalla solua. T\u00e4m\u00e4n j\u00e4lkeen auton voi poistaa tai est\u00e4\u00e4 sen lainaamisen.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.vehiclePictureLabel.setText("")
         self.numberPlateLabel.setText(QCoreApplication.translate("MainWindow", u"Rekisterinumero", None))
         self.manufacturerLabel.setText(QCoreApplication.translate("MainWindow", u"Merkki", None))
         self.modelLabel.setText(QCoreApplication.translate("MainWindow", u"Malli", None))
@@ -557,6 +634,7 @@ class Ui_MainWindow(object):
         self.capacityLabel.setText(QCoreApplication.translate("MainWindow", u"Henkil\u00f6m\u00e4\u00e4r\u00e4", None))
         self.vehicleTypeLabel.setText(QCoreApplication.translate("MainWindow", u"Ajoneuvotyyppi", None))
         self.agbLabel.setText(QCoreApplication.translate("MainWindow", u"Automaatti", None))
+        self.divisionLabel.setText(QCoreApplication.translate("MainWindow", u"Osasto", None))
         self.vehicleOwnerLabel.setText(QCoreApplication.translate("MainWindow", u"Vastuuhenkil\u00f6", None))
         self.numberPlateLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Pakollinen tieto", None))
         self.manufacturerLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Pakollinen tieto", None))
@@ -568,19 +646,21 @@ class Ui_MainWindow(object):
         self.agbCheckBox.setToolTip(QCoreApplication.translate("MainWindow", u"Autossa automaattivaihteet, pakollinen tieto", None))
 #endif // QT_CONFIG(tooltip)
         self.agbCheckBox.setText(QCoreApplication.translate("MainWindow", u"Automaattivaihteet", None))
+        self.divisionComboBox.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Pakollinen tieto", None))
         self.vehicleOwnerLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Valinnainen tieto", None))
-        self.saveVehiclePushButton.setText(QCoreApplication.translate("MainWindow", u"Tallenna", None))
+        self.label.setText(QCoreApplication.translate("MainWindow", u"Paikannustunnus", None))
 #if QT_CONFIG(tooltip)
-        self.vehicleCatalogTableWidget.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Valitse auto klikkaamalla solua. T\u00e4m\u00e4n j\u00e4lkeen auton voi poistaa tai est\u00e4\u00e4 sen lainaamisen.</p></body></html>", None))
+        self.deviceIdLineEdit.setToolTip(QCoreApplication.translate("MainWindow", u"Paikannin.com-palvelun deviceID", None))
 #endif // QT_CONFIG(tooltip)
+        self.deviceIdLineEdit.setPlaceholderText(QCoreApplication.translate("MainWindow", u"Pakollinen tieto", None))
 #if QT_CONFIG(tooltip)
         self.openPicturePushButton.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Lis\u00e4\u00e4 auton kuvan Kuvat-kansiosta</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
         self.openPicturePushButton.setText("")
-        self.vehiclePictureLabel.setText("")
-        self.removeVehiclePushButton.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
-        self.notLendablePushButton.setText(QCoreApplication.translate("MainWindow", u"Ei lainattavissa", None))
         self.updatePicturePushButton.setText(QCoreApplication.translate("MainWindow", u"P\u00e4ivit\u00e4 kuva", None))
+        self.saveVehiclePushButton.setText(QCoreApplication.translate("MainWindow", u"Tallenna", None))
+        self.notLendablePushButton.setText(QCoreApplication.translate("MainWindow", u"Ei lainattavissa", None))
+        self.removeVehiclePushButton.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.vehicleTab), QCoreApplication.translate("MainWindow", u"Autot", None))
         self.reportTypecomboBox.setCurrentText("")
         self.reportTypeLabel.setText(QCoreApplication.translate("MainWindow", u"Raportti", None))
@@ -620,6 +700,15 @@ class Ui_MainWindow(object):
         self.reasonAddPushButton.setText(QCoreApplication.translate("MainWindow", u"Lis\u00e4\u00e4", None))
         self.reasonDeltePushButton.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
         self.reasonAddLabel.setText(QCoreApplication.translate("MainWindow", u"Ajon tarkoitukset", None))
+#if QT_CONFIG(tooltip)
+        self.divisionTableWidget.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Voit poistaa ajoneuvotyypin valitsemalla sen taulukosta ja painamalla Poista-painiketta. Jos tyypill\u00e4 on jo ajop\u00e4iv\u00e4kirjamerkint\u00f6j\u00e4, poistaminen ei ole mahdollista.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.divisionAddLabel.setText(QCoreApplication.translate("MainWindow", u"Osastot", None))
+#if QT_CONFIG(tooltip)
+        self.divisionAddLineEdit.setToolTip(QCoreApplication.translate("MainWindow", u"<html><head/><body><p>Kirjoita kentt\u00e4\u00e4n lis\u00e4tt\u00e4v\u00e4 ajoneuvotyyppi ja paina Lis\u00e4\u00e4-painiketta. Painike tulee n\u00e4kyviin kirjoitettuasi kentt\u00e4\u00e4n.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+        self.divisionAddPushButton.setText(QCoreApplication.translate("MainWindow", u"Lis\u00e4\u00e4", None))
+        self.divisionDeletePushButton.setText(QCoreApplication.translate("MainWindow", u"Poista", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.maintenanceTab), QCoreApplication.translate("MainWindow", u"Yll\u00e4pito", None))
         self.menuAsetukset.setTitle(QCoreApplication.translate("MainWindow", u"Asetukset", None))
         self.menuOhje.setTitle(QCoreApplication.translate("MainWindow", u"Ohje", None))

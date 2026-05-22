@@ -379,9 +379,15 @@ class DbConnection():
 if __name__ == "__main__":
 
     settingsDictionary = {'server': 'localhost',
-                      'port': '5433',
-                      'database': 'testaus',
+                      'port': '5432',
+                      'database': 'autolainaus',
                       'userName': 'postgres',
-                      'password': 'Q2werty'}
+                      'password': 'Q2werty7'}
+    
     dbconnection = DbConnection(settingsDictionary)
+
+    columsList = ['rekisterinumero', 'deviceid', 'merkki','osasto']
+
+    data = dbconnection.readColumsFromTable('auto', columsList)
+    print(data)
     
