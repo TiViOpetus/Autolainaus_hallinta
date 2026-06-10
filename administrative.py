@@ -107,12 +107,14 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.vehicleTypeDeletePushButton.clicked.connect(self.deleteVehicleType)
         self.ui.updatePicturePushButton.clicked.connect(self.updatePicture)
         self.ui.divisionAddPushButton.clicked.connect(self.newDivision)
+        self.ui.divisionDeletePushButton.clicked.connect(self.deleteDivision)
 
         # Taulukoiden solujen klikkaaminen
         self.ui.vehicleCatalogTableWidget.cellClicked.connect(self.setRegisterNumber)
         self.ui.registeredPersonsTableWidget.cellClicked.connect(self.setSSN)
         self.ui.vehicleTypeTableWidget.cellClicked.connect(self.setVehicleType)
         self.ui.reasonAddTableWidget.cellClicked.connect(self.setReason)
+        self.ui.divisionTableWidget.cellClicked.connect(self.setDivision)
         
         
         
@@ -121,6 +123,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.vehicleClassLineEdit.textChanged.connect(self.showSavePersonPB) # Poistutaan ajokorttiluokka-kentästä
         self.ui.vehicleTypeAddLineEdit.textChanged.connect(self.showVehicleTypeAddPB)
         self.ui.reasonAddLineEdit.textChanged.connect(self.showReasonAddPB)
+        self.ui.divisionAddLineEdit.textChanged.connect(self.showDivisionAddPB)
 
         # Painikkeiden deaktivoinnit kun aloitetaan ensimmäisen lomakekentän muokkaaminen
         self.ui.ssnLineEdit.textChanged.connect(self.hideDeletePersonPB)
@@ -172,6 +175,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.updateVehicleTableWidget() # Autojen tiedot
         self.updateVehicleTypeTableWidget() # Autotyyppien ylläpidon taulukko
         self.updateReasonAddTableWidget() # Ajon syiden ylläpidon taulukko
+        self.updateDivisionTableWidget() # Osastojen ylläpidon taulukko
         self.ui.diaryTableWidget.clear() # Tyhjentää raporttisivun taulukon
         self.ui.reasonAddLineEdit.clear() # Ajon syyn lisäyskentän tyhjennys
         self.ui.vehicleTypeAddLineEdit.clear() # Ajoneuvotyypin lisäyskentän tyhjennys
@@ -184,6 +188,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.reasonAddPushButton.setHidden(True) # Ajon syyn lisäyspainike piiloon
         self.ui.reasonDeltePushButton.setHidden(True) # Ajon syyn poistopainike piiloon
         self.ui.vehicleTypeDeletePushButton.setHidden(True) # Ajon tarkoituksen poistopainike piiloon
+        self.ui.divisionDeletePushButton.setHidden(True) # Osaston poistopainikkeen piiloon
+        self.ui.divisionAddPushButton.setHidden(True) # Osaston lisäyspainike piiloon
         self.ui.updatePicturePushButton.setHidden(True) # Auton kuvan päivityspainike piiloon
     
     # Välilehtien slotit
@@ -232,7 +238,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Lista ajopäiväkirjoista -> raporttinäkymien nimet
         self.ui.reportTypecomboBox.clear()
-        self.ui.reportTypecomboBox.addItems(['ajopaivakirja', 'autoittain'])
+        self.ui.reportTypecomboBox.addItems(['ajopaivakirja', 'autoittain', 'ajoraportti'])
 
         # Raporttivälin päivämäärävalitsinten oletuspäivien asetus
         self.ui.beginingDateEdit.setDate(self.firstDayOfYear)
@@ -279,10 +285,12 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Luodaan tietokantayhteys-olio
         dbConnection = dbOperations.DbConnection(dbSettings)
 
-        # Tehdään lista lainaaja-taulun tiedoista
+        # Tehdään lista auto-taulun tiedoista
         columnList = ['rekisterinumero', 'deviceid', 'merkki', 'malli', 'vuosimalli', 'tyyppi','henkilomaara', 'automaatti', 'osasto', 'vastuuhenkilo', 'kaytettavissa']
+        numberOfColumns = len(columnList)
+        self.ui.vehicleCatalogTableWidget.setColumnCount(numberOfColumns)
         tableData = dbConnection.readColumsFromTable('auto', columnList)
-
+        
         # Tyhjennetään vanhat tiedot käyttöliittymästä ennen uusien lukemista tietokannasta
         self.ui.vehicleCatalogTableWidget.clearContents()
 
@@ -315,32 +323,67 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         reasonFilter = self.ui.reasonFilterLineEdit.text()
         sqlFilter = ''
 
+        # Valitaan otsakkeet ja suodatusvaihtoehdot valitun raporttityypin mukaan
+        if reportName == 'ajoraportti':
+            self.ui.ssnFilterLineEdit.clear()
+            self.ui.ssnFilterLineEdit.setEnabled(False)
+            headerRow = ['Auto', 'Lähtö', 'Paluu', 'Tarkoitus', 'Kuljettaja', 'Mistä', 'Mihin', 'MM alussa', 'MM lopussa']
+            timeFilterTerm = 'lähtö'
+            vehicleFilterTerm = 'auto'
+
+            # Määritellään aikaväli, jolta raportti tulostetaan
+            dateFilterSring = f"{timeFilterTerm} >= '{dateStart} 00:00:00+2' AND {timeFilterTerm} <= '{dateEnd} 23:59:59+2'"
+            
+            # Määritellään mahdollinen rekisterinumerosuodatus  
+            if registerFilter == '':
+                registerFilterString = ''
+            else:
+                registerFilterString =  f"AND {vehicleFilterTerm} = '{registerFilter}'"
+            
+            # Määritellään mahdollinen ajontarkoitussuodatus
+            if reasonFilter == '':
+                reasonFilterString = ''
+            else:
+                reasonFilterString =  f"AND tarkoitus = '{reasonFilter}'"
+
+            # Koostetaan kyselyn suodatusehdot
+            sqlFilter = dateFilterSring + registerFilterString + reasonFilterString
+
+        else:
+            self.ui.ssnFilterLineEdit.setEnabled(True)
+            headerRow = ['Rekisteri', 'Merkki', 'Malli', 'Tarkoitus', 'HeTu', 'Sukunimi', 'Etunimi', 'Otettu', 'Palautettu']
+            timeFilterTerm = 'otto'
+            vehicleFilterTerm = 'rekisterinumero'
+            
+            # Määritellään aikaväli, jolta raportti tulostetaan
+            dateFilterSring = f"{timeFilterTerm} >= '{dateStart} 00:00:00+2' AND {timeFilterTerm} <= '{dateEnd} 23:59:59+2'"
+            
+            # Määritellään mahdollinen rekisterinumerosuodatus  
+            if registerFilter == '':
+                registerFilterString = ''
+            else:
+                registerFilterString =  f"AND {vehicleFilterTerm} = '{registerFilter}'"
+            
+            # Määritellään mahdollinen käyttäjäsuodatus
+            if userFilter == '':
+                userFilterString = ''
+            else:
+                userFilterString = f"AND hetu = '{userFilter}'"
+            
+            # Määritellään mahdollinen ajontarkoitussuodatus
+            if reasonFilter == '':
+                reasonFilterString = ''
+            else:
+                reasonFilterString =  f"AND tarkoitus = '{reasonFilter}'"
+            
+            sqlFilter = dateFilterSring + userFilterString + registerFilterString + reasonFilterString
+        
+        self.ui.diaryTableWidget.setHorizontalHeaderLabels(headerRow)
+        
         # Luodaan tietokantayhteys-olio
         dbConnection = dbOperations.DbConnection(dbSettings)
 
-        # Määritellään aikaväli, jolta raportti tulostetaan
-        dateFilterSring = f"otto >= '{dateStart} 00:00:00+2' AND otto <= '{dateEnd} 23:59:59+2'"
-
-        # Määritellään mahdollinen käyttäjäsuodatus
-        if userFilter == '':
-            userFilterString = ''
-        else:
-            userFilterString = f"AND hetu = '{userFilter}'"
-
-        # Määritellään mahdollinen rekisterinumerosuodatus  
-        if registerFilter == '':
-            registerFilterString = ''
-        else:
-            registerFilterString =  f"AND rekisterinumero = '{registerFilter}'"
-
-        # Määritellään mahdollinen ajontarkoitussuodatus
-        if reasonFilter == '':
-            reasonFilterString = ''
-        else:
-            reasonFilterString =  f"AND tarkoitus = '{reasonFilter}'"
-
-        # Lopullinen SQL-suodatin
-        sqlFilter = dateFilterSring + userFilterString + registerFilterString + reasonFilterString
+        # Suoritetaan kysely valitusta näkymästä valittuja suodattimia käyttämällä
         tableData = dbConnection.filterColumsFromTable(reportName,['*'], sqlFilter)
     
         # Tyhjennetään vanhat tiedot käyttöliittymästä ennen uusien lukemista tietokannasta
@@ -419,6 +462,33 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
                 data = QtWidgets.QTableWidgetItem(str(tableData[row][column])) 
                 self.ui.reasonAddTableWidget.setItem(row, column, data)
     
+    # Päivitetään osasto-taulukko
+    def updateDivisionTableWidget(self):
+        # Luetaan tietokanta-asetukset paikallisiin muuttujiin
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword # Vaidetaan selväkieliseksi
+
+        # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Tehdään lista osasto-taulun tiedoista
+        tableData = dbConnection.readAllColumnsFromTable('osasto')
+
+        # Tyhjennetään vanhat tiedot käyttöliittymästä ennen uusien lukemista tietokannasta
+        self.ui.divisionTableWidget.clearContents()
+
+        # Määritellään taulukkoelementin otsikot
+        headerRow = ['Osasto']
+        self.ui.divisionTableWidget.setHorizontalHeaderLabels(headerRow)
+
+        # Asetetaan taulukon solujen arvot
+        for row in range(len(tableData)): # Luetaan listaa riveittäin
+            for column in range(len(tableData[row])): # Luetaan monikkoa sarakkeittain
+                
+                # Muutetaan merkkijonoksi ja QTableWidgetItem-olioksi
+                data = QtWidgets.QTableWidgetItem(str(tableData[row][column])) 
+                self.ui.divisionTableWidget.setItem(row, column, data)
     
     # Syöttölomaketietojen tyhjennys
     # ------------------------------
@@ -480,6 +550,10 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     def showReasonAddPB(self):
         self.ui.reasonAddPushButton.setHidden(False)
 
+    # Osaston lisäyspainikkeen näyttäminen
+    def showDivisionAddPB(self):
+        self.ui.divisionAddPushButton.setHidden(False)
+
     # Piilotetaan ajoneuvon Poista-, Ei käytettävissä ja päivitä kuva -painikeet
     def hideVehicleButtons(self):
         self.ui.removeVehiclePushButton.setHidden(True)
@@ -489,7 +563,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Päivitetään auton kuvaksi harmaa kamera
         self.vehiclePicture = 'uiPictures\\noPicture.png'
 
-
+    # Piilottetaan henkilön poistopainike
     def hideDeletePersonPB(self):
         self.ui.deletePersonPushButton.setHidden(True)    
 
@@ -666,6 +740,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         except Exception as e:
             self.openWarning('Poisto ei onnistunut', str(e))
 
+    # Henkilön poistaminen
     def deletePerson(self):
 
         # Määritellään tietokanta-asetukset
@@ -679,6 +754,23 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         # Kutsutaan tallennusmetodia
         try:
             dbConnection.deleteRowsFromTable('lainaaja', 'hetu', f"'{self.personToDelete}'")
+            self.refreshUi()
+        except Exception as e:
+            self.openWarning('Poisto ei onnistunut', str(e))
+    
+    # Osaston poistaminen
+    def deleteDivision(self):
+        # Määritellään tietokanta-asetukset
+        dbSettings = self.currentSettings
+        plainTextPassword = self.plainTextPassword
+        dbSettings['password'] = plainTextPassword
+
+        # Luodaan tietokantayhteys-olio
+        dbConnection = dbOperations.DbConnection(dbSettings)
+
+        # Kutsutaan tallennusmetodia
+        try:
+            dbConnection.deleteRowsFromTable('osasto', 'osasto', f"'{self.divisionToModify}'")
             self.refreshUi()
         except Exception as e:
             self.openWarning('Poisto ei onnistunut', str(e))
@@ -872,6 +964,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.statusbar.showMessage(f'Poistettava ajoneuvotyyppi on {cellValue}')
         self.ui.vehicleTypeDeletePushButton.setHidden(False)
         self.ui.reasonDeltePushButton.setHidden(True)
+        self.ui.divisionDeletePushButton.setHidden(True)
 
     # Asetetaan poistettava ajon syy    
     def setReason(self):
@@ -886,6 +979,22 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         self.ui.statusbar.showMessage(f'Poistettava ajon syy on {cellValue}')
         self.ui.reasonDeltePushButton.setHidden(False)
         self.ui.vehicleTypeDeletePushButton.setHidden(True)
+        self.ui.divisionDeletePushButton.setHidden(True)
+
+    # Asetetaa poistettan osaston nimi
+    def setDivision(self):
+        rowIndex = 0
+        columnIndex = 0
+        cellValue = ''
+
+        # Haetaan aktiivisen solun rivinumero ja ensimmäisen sarakkeen arvo siltä riviltä
+        rowIndex = self.ui.divisionTableWidget.currentRow()
+        cellValue = self.ui.divisionTableWidget.item(rowIndex, columnIndex).text()
+        self.divisionToModify = cellValue
+        self.ui.statusbar.showMessage(f'Poistettava osasto on {cellValue}')
+        self.ui.divisionDeletePushButton.setHidden(False)
+        self.ui.vehicleTypeDeletePushButton.setHidden(True)
+        self.ui.reasonDeltePushButton.setHidden(True)
 
     # Virheilmoitukset ja muut Message Box -dialogit
     # ----------------------------------------------
