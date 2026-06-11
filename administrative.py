@@ -324,7 +324,7 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
         sqlFilter = ''
 
         # Valitaan otsakkeet ja suodatusvaihtoehdot valitun raporttityypin mukaan
-        if reportName == 'ajoraportti':
+        if reportName == 'ajopaivakirja':
             self.ui.ssnFilterLineEdit.clear()
             self.ui.ssnFilterLineEdit.setEnabled(False)
             headerRow = ['Auto', 'Lähtö', 'Paluu', 'Tarkoitus', 'Kuljettaja', 'Mistä', 'Mihin', 'MM alussa', 'MM lopussa']
@@ -391,8 +391,8 @@ class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
 
         # Määritellään taulukkoelementin otsikot
         # FIXME: Tässä on jokin virhe, koska malli ei näy. Korjattu tietokannan näkymään puuttunut sarake (malli)
-        headerRow = ['Rekisteri', 'Merkki', 'Malli', 'Tarkoitus', 'HeTu', 'Sukunimi', 'Etunimi', 'Otettu', 'Palautettu']
-        self.ui.diaryTableWidget.setHorizontalHeaderLabels(headerRow)
+        # headerRow = ['Rekisteri', 'Merkki', 'Malli', 'Tarkoitus', 'HeTu', 'Sukunimi', 'Etunimi', 'Otettu', 'Palautettu']
+        # self.ui.diaryTableWidget.setHorizontalHeaderLabels(headerRow)
 
         # Tulosjoukon rivimäärä
         numberOfRows = len(tableData)
